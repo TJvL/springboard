@@ -1,25 +1,31 @@
 plugins {
     alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.kotlin.spring) apply false
+    alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.spring.dependency.management) apply false
+    alias(libs.plugins.graalvm.native) apply false
     alias(libs.plugins.spotless)
 }
 
 group = "dev.tjvl.springboard"
-
 version = "1.0-SNAPSHOT"
 
 repositories { mavenCentral() }
 
+extra["springModulithVersion"] =
+    libs.versions.spring.modulith
+        .get()
+
 spotless {
     kotlin {
         target("**/*.kt")
-        ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle()
+        ktlint(libs.versions.ktlint.get())
         trimTrailingWhitespace()
         endWithNewline()
     }
     kotlinGradle {
         target("**/*.gradle.kts")
-        ktfmt(libs.versions.ktfmt.get()).kotlinlangStyle()
+        ktlint(libs.versions.ktlint.get())
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -55,53 +61,66 @@ subprojects {
     version = rootProject.version
 
     apply(
-        plugin = rootProject.libs.plugins.kotlin.jvm.get().pluginId,
+        plugin =
+            rootProject.libs.plugins.kotlin.jvm
+                .get()
+                .pluginId,
     )
     apply(
-        plugin = rootProject.libs.plugins.spotless.get().pluginId,
-    )
-
-    apply(
-        plugin = rootProject.libs.plugins.detekt.get().pluginId,
+        plugin =
+            rootProject.libs.plugins.spotless
+                .get()
+                .pluginId,
     )
 
     configure<JavaPluginExtension> {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(rootProject.libs.versions.java.get()))
+            languageVersion.set(
+                JavaLanguageVersion.of(
+                    rootProject.libs.versions.java
+                        .get(),
+                ),
+            )
         }
     }
 
-    configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-        toolVersion = rootProject.libs.versions.detekt.get()
-        buildUponDefaultConfig = true
-        allRules = true
-        source.setFrom("src/main/kotlin", "src/test/kotlin")
-        parallel = true
-        ignoreFailures = false
-        autoCorrect = true
-        config.setFrom(files("${rootProject.projectDir}/detekt.yml"))
-    }
-
     repositories { mavenCentral() }
+
+    // Configure dependency management for Spring Boot modules
+    pluginManager.withPlugin("io.spring.dependency-management") {
+        configure<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension> {
+            imports {
+                mavenBom(
+                    rootProject.libs.spring.boot.dependencies
+                        .get()
+                        .toString(),
+                )
+                mavenBom(
+                    rootProject.libs.spring.modulith.bom
+                        .get()
+                        .toString(),
+                )
+            }
+        }
+    }
 
     tasks.withType<Test> {
         useJUnitPlatform()
         testLogging { events("passed", "skipped", "failed") }
     }
 
-    tasks.named("check") { dependsOn("spotlessCheck", "detekt") }
+    tasks.named("check") { dependsOn("spotlessCheck") }
 
     tasks.named("build") { dependsOn("check") }
+
+    // Configure Kotlin compiler options for Spring Boot compatibility
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") }
+    }
 }
 
-tasks.register("formatAndLint") {
+tasks.register("applyFormat") {
     group = "verification"
-    description = "Apply code formatting and run static analysis"
-    dependsOn("spotlessApply", "detekt")
-}
-
-tasks.register("fix") {
-    group = "verification"
-    description = "Fix code formatting and apply auto-corrections"
+    description = "Fix code formatting"
     dependsOn("spotlessApply")
 }

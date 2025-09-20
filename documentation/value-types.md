@@ -342,9 +342,9 @@ f47ac10b-58cc-4372-a567-0e02b2c3d479
 - **Integer | pow Integer/Decimal**: Result is Integer/Decimal (power operation)
 - **Decimal | pow Integer/Decimal**: Result is Decimal (power operation)
 - **Currency + Currency**: Only if same currency, result is Currency
-- **Currency * Integer/Decimal**: Result is Currency (e.g., USD100.00 * 2 = USD200.00)
+- **Currency \* Integer/Decimal**: Result is Currency (e.g., USD100.00 \* 2 = USD200.00)
 - **Currency / Integer/Decimal**: Result is Currency (e.g., USD100.00 / 2 = USD50.00)
-- **Integer/Decimal * Currency**: Not allowed (would be ambiguous)
+- **Integer/Decimal \* Currency**: Not allowed (would be ambiguous)
 - **Integer/Decimal / Currency**: Not allowed (would be ambiguous)
 - **Date/DateTime ± Period**: Result is Date/DateTime
 - **DateTime/Timestamp ± Duration**: Result is DateTime/Timestamp

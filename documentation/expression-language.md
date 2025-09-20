@@ -241,6 +241,7 @@ P1D + PT12H              // P1DT12H
 ```
 
 **Precedence Rules**:
+
 1. **Parentheses `()`**: Highest precedence - expressions in parentheses are evaluated first
 2. **Unary operators `+`, `-`**: Applied to single operands
 3. **Power `^`**: Right-associative (2^3^2 = 2^(3^2) = 512)
@@ -276,6 +277,7 @@ userName | uppercase | contains "ADMIN"  // check if username contains "ADMIN"
 ```
 
 **Operation Details**:
+
 - `trim`: Removes leading and trailing whitespace - Input: Text (required), Output: Text (required)
 - `lowercase`: Converts text to lowercase - Input: Text (required), Output: Text (required)
 - `uppercase`: Converts text to uppercase - Input: Text (required), Output: Text (required)

@@ -1,0 +1,72 @@
+# .dockerignore for Springboard Application
+# Exclude build artifacts and temporary files to reduce build context size
+
+# Git and version control
+.git/
+.gitignore
+.github/
+
+# Build directories
+**/build/
+**/target/
+**/out/
+**/.gradle/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Documentation that's not needed for build
+README.md
+**/README.md
+documentation/
+*.md
+
+# Test files (not needed for production build)
+**/src/test/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Node modules (if any)
+node_modules/
+
+# Docker files in subdirectories (avoid recursion)
+**/Dockerfile
+**/.dockerignore
+
+# IDE and editor configs
+.editorconfig
+*.code-workspace
+
+# Coverage reports
+coverage/
+**/jacoco/
+
+# Spotless temporary files
+**/spotless*/

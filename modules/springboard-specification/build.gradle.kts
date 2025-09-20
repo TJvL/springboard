@@ -1,14 +1,15 @@
+plugins {
+    alias(libs.plugins.spring.dependency.management)
+}
+
 dependencies {
     // Module dependencies - depends on all modules in the repository
     testImplementation(projects.modules.springboardCore)
     testImplementation(projects.modules.springboardExpression)
     testImplementation(projects.modules.springboardInference)
 
-    // Standard library
-    testImplementation(libs.kotlin.stdlib)
-
     // Test dependencies - using specification bundle
-    testImplementation(libs.bundles.specification)
+    testImplementation(libs.bundles.specification.test)
 }
 
 tasks.withType<Test> {

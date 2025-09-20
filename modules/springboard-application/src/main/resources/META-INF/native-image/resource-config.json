@@ -1,0 +1,41 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "\\Qapplication.properties\\E"
+      },
+      {
+        "pattern": "\\Qapplication.yml\\E"
+      },
+      {
+        "pattern": "\\Qapplication.yaml\\E"
+      },
+      {
+        "pattern": "\\Qapplication-*.properties\\E"
+      },
+      {
+        "pattern": "\\Qapplication-*.yml\\E"
+      },
+      {
+        "pattern": "\\Qapplication-*.yaml\\E"
+      },
+      {
+        "pattern": "\\Qmessages.properties\\E"
+      },
+      {
+        "pattern": "\\Qmessages_*.properties\\E"
+      },
+      {
+        "pattern": "\\QValidationMessages.properties\\E"
+      }
+    ]
+  },
+  "bundles": [
+    {
+      "name": "messages"
+    },
+    {
+      "name": "ValidationMessages"
+    }
+  ]
+}

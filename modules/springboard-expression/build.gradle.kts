@@ -1,10 +1,11 @@
-plugins { alias(libs.plugins.antlr) }
+plugins {
+    alias(libs.plugins.antlr)
+    alias(libs.plugins.spring.dependency.management)
+}
 
 description = "Springboard Expression Module - ANTLR-based expression parsing and evaluation"
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
-
     implementation(libs.antlr.runtime)
     antlr(libs.antlr.tool)
 
@@ -12,7 +13,7 @@ dependencies {
 
     api(projects.modules.springboardCore)
 
-    testImplementation(libs.bundles.test)
+    testImplementation(libs.bundles.unit.test)
 }
 
 sourceSets { main { java { srcDir("${layout.buildDirectory.get()}/generated-src/antlr/main") } } }
