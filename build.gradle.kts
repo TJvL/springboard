@@ -65,6 +65,12 @@ subprojects {
         plugin = rootProject.libs.plugins.detekt.get().pluginId,
     )
 
+    configure<JavaPluginExtension> {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(rootProject.libs.versions.java.get()))
+        }
+    }
+
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         toolVersion = rootProject.libs.versions.detekt.get()
         buildUponDefaultConfig = true
