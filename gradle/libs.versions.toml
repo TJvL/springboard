@@ -1,0 +1,49 @@
+[versions]
+java = "21"
+kotlin = "2.2.20"
+
+# Quality assurance
+spotless = "7.2.1"
+detekt = "1.23.8"
+ktfmt = "0.51"
+prettier = "3.6.2"
+
+# Runtime
+antlr = "4.13.2"
+javamoney = "1.4.5"
+
+# Test
+junit = "5.13.4"
+junit-platform = "1.13.4"
+assertj = "3.27.4"
+mockito = "5.19.0"
+cucumber = "7.23.0"
+
+[libraries]
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+antlr-runtime = { module = "org.antlr:antlr4-runtime", version.ref = "antlr" }
+antlr-tool = { module = "org.antlr:antlr4", version.ref = "antlr" }
+javamoney-moneta = { module = "org.javamoney:moneta", version.ref = "javamoney" }
+
+# Test dependencies
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+junit-platform-suite-api = { module = "org.junit.platform:junit-platform-suite-api", version.ref = "junit-platform" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+cucumber-java = { module = "io.cucumber:cucumber-java", version.ref = "cucumber" }
+cucumber-junit-platform-engine = { module = "io.cucumber:cucumber-junit-platform-engine", version.ref = "cucumber" }
+cucumber-picocontainer = { module = "io.cucumber:cucumber-picocontainer", version.ref = "cucumber" }
+
+[bundles]
+test = ["junit-jupiter", "junit-jupiter-engine", "junit-jupiter-api", "junit-platform-launcher", "assertj-core", "mockito-core", "mockito-junit-jupiter"]
+specification = ["junit-jupiter", "junit-jupiter-engine", "junit-jupiter-api", "junit-platform-launcher", "junit-platform-suite-api", "assertj-core", "cucumber-java", "cucumber-junit-platform-engine", "cucumber-picocontainer"]
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+antlr = { id = "antlr" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

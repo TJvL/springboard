@@ -1,0 +1,60 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"chat.tools.terminal.autoApprove": {
+			"./gradlew": true,
+			"git": true,
+			"ls": true,
+			"cat": true,
+			"head": true,
+			"tail": true,
+			"find": true,
+			"grep": true,
+			"sed": true,
+			"wc": true,
+			"pwd": true,
+			"cd": true,
+			"mkdir": true,
+			"touch": true,
+			"cp": true,
+			"mv": true,
+			"echo": true,
+			"printf": true,
+			"which": true,
+			"whereis": true,
+			"tar": true,
+			"unzip": true,
+			"curl": true,
+			"wget": true,
+			"hexdump": true,
+		},
+		"chat.agent.maxRequests": 500,
+		"github.copilot.chat.commitMessageGeneration.instructions": [
+			{
+				"text": "Use conventional commit message format."
+			}
+		],
+		"github.copilot.chat.reviewSelection.instructions": [
+			{
+				"file": ".github/copilot-review-instructions.md"
+			},
+			{
+				"file": "detekt.yml"
+			},
+			{
+				"text": "A high priority is to ensure the code adheres to the 'General Coding Standards'."
+			},
+			{
+				"text": "Implementation of a feature is only truly completed when './gradlew build' is successful."
+			},
+			{
+				"text": "Find documentation in folder './documentation'."
+			},
+		]
+	}
+}
